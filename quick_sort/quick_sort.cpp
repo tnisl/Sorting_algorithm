@@ -1,8 +1,23 @@
+/*
+OK!!  Test 0: 1429
+OK!!  Test 1: 1471
+OK!!  Test 2: 1488
+OK!!  Test 3: 1462
+OK!!  Test 4: 1550
+OK!!  Test 5: 1477
+OK!!  Test 6: 1398
+OK!!  Test 7: 1420
+OK!!  Test 8: 1455
+OK!!  Test 9: 1481
+*/
+
 #include<iostream>
 #include<vector>
 #include<chrono>
 #include<random>
 #include<algorithm>
+#include<string>
+#include<fstream>
 using namespace std;
 using namespace std::chrono;
 
@@ -62,28 +77,42 @@ void Quick_sort(vector<T> &v, int left, int right){
 }
 
 
-
-int32_t main(){
-    freopen("./test/0.inp", "r", stdin);
-    freopen("qs0.out", "w", stdout);
-    int n;
-    cin>>n;
-    cout<<n<<endl;
-    a.resize(n);
-    for(auto &x:a) cin>>x;
+string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/test/";
 
 
+void execute_test(int k){
+    string t = "..inp";
+    t[0] = '0' + k;
+    ifstream fi(PATH + t);
     
+    int n;
+    fi>>n;
+    a.resize(n);
+    for(auto &x:a) fi>>x;
+    
+
+
+
+
     auto start = high_resolution_clock::now();
     
-    cerr<<"OK!!"<<endl;
+    cerr<<"OK!!  ";
     Quick_sort(a, 0, n-1);
 
     auto stop = high_resolution_clock::now();
     
     auto duration = duration_cast<milliseconds>(stop - start);
 
-    cerr<<"TIME: "<<duration.count();
-    
+    cerr<<"Test "<<k<< ": "<<duration.count()<<endl;
+    fi.close();
+    for(const auto &x:a) cout<<x<<endl;
+}
+
+
+
+int32_t main(){
+    freopen("qs.out", "w", stdout);
+    for(int i=0;i<10;++i)
+        execute_test(i);
     return 0;
 }
