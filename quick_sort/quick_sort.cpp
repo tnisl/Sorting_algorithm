@@ -1,14 +1,14 @@
 /*
-OK!!  Test 0: 1429
-OK!!  Test 1: 1471
-OK!!  Test 2: 1488
-OK!!  Test 3: 1462
-OK!!  Test 4: 1550
-OK!!  Test 5: 1477
-OK!!  Test 6: 1398
-OK!!  Test 7: 1420
-OK!!  Test 8: 1455
-OK!!  Test 9: 1481
+OK!!  Test 0: 646
+OK!!  Test 1: 640
+OK!!  Test 2: 721
+OK!!  Test 3: 730
+OK!!  Test 4: 713
+OK!!  Test 5: 710
+OK!!  Test 6: 717
+OK!!  Test 7: 718
+OK!!  Test 8: 713
+OK!!  Test 9: 719
 */
 
 #include<iostream>
@@ -29,19 +29,16 @@ long long Rand(long long l, long long r){
 
 vector<double> a;
 /*
-lựa chọn pivot: 
-ngoại trừ các phần tử lớn nhất và nhỏ nhất, chọn ngẫu nhiên 1 phần tử trong mảng,
-nếu không có, lựa chọn phần tử lớn nhất
+lựa chọn pivot: lấy trung bình cộng các số, nếu bằng giá trị nhỏ nhất, pivot = max, nếu không pivot = tbc;
 */
 template <typename T>
 T Find_pivot(vector<T> &v, int left, int right){
     T mi = *min_element(v.begin()+left, v.begin()+right+1);
     T ma = *max_element(v.begin()+left, v.begin()+right+1);
-    vector<T> id;
-    for(int i=left; i<=right;++i)
-        if(v[i]!=ma && v[i]!=mi) id.push_back(i);
-    if(id.empty()) return ma;
-    return v[id[Rand(0, (int)id.size()-1)]];
+    T sum = accumulate(v.begin()+left, v.begin()+right+1, 0);
+    sum /= (right-left+1);
+    if(sum == mi) return ma;
+    return sum;
 }
 
 template <typename T>
