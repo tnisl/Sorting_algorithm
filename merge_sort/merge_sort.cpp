@@ -1,14 +1,14 @@
 /*
-OK!!  Test 0: 2110
-OK!!  Test 1: 2093
-OK!!  Test 2: 2648
-OK!!  Test 3: 2404
-OK!!  Test 4: 2397
-OK!!  Test 5: 2397
-OK!!  Test 6: 2423
-OK!!  Test 7: 2394
-OK!!  Test 8: 2400
-OK!!  Test 9: 2396
+OK!!  Test 0: 1669
+OK!!  Test 1: 1681
+OK!!  Test 2: 1992
+OK!!  Test 3: 1997
+OK!!  Test 4: 1988
+OK!!  Test 5: 1984
+OK!!  Test 6: 1981
+OK!!  Test 7: 1978
+OK!!  Test 8: 1977
+OK!!  Test 9: 1969
 */
 
 #include<iostream>
@@ -35,17 +35,18 @@ string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/test/";
 template <typename T>
 void Merge_sort(vector<T> &a){
     if(a.size()<=1) return;
-    vector<T> b;
+    vector<T> left, right;
     int n = a.size();
     int mid = n/2;
-    while(a.size()>mid) b.push_back(a.back()), a.pop_back();
-    Merge_sort(a);
-    Merge_sort(b);
-    vector<T> v(a.size() + b.size());
-    merge(a.begin(),a.end(), b.begin(),b.end(),v.begin()); //sử dụng std::merge để merge 2 dãy đã sort
-    a.clear();
-    for(const auto &x:v) a.push_back(x);
-    v.clear();
+    for(int i=0;i<mid;++i)
+        left.push_back(a[i]);
+    for(int i=mid;i<n;++i)
+        right.push_back(a[i]);
+    
+    Merge_sort(left);
+    Merge_sort(right);
+    merge(left.begin(),left.end(), right.begin(),right.end(), a.begin());//sử dụng std::merge để gộp 2 dãy
+
     
 }
 
