@@ -81,7 +81,7 @@ void Quick_sort(vector<T> &v, int left, int right){
 }
 
 
-string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/test/";
+string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/Sort/test/";
 
 
 void execute_test(int k){
