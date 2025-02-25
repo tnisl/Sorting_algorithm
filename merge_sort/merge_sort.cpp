@@ -1,14 +1,14 @@
 /*
-OK!!  Test 0: 1669
-OK!!  Test 1: 1681
-OK!!  Test 2: 1992
-OK!!  Test 3: 1997
-OK!!  Test 4: 1988
-OK!!  Test 5: 1984
-OK!!  Test 6: 1981
-OK!!  Test 7: 1978
-OK!!  Test 8: 1977
-OK!!  Test 9: 1969
+OK!!  Test 0: 836
+OK!!  Test 1: 847
+OK!!  Test 2: 1156
+OK!!  Test 3: 1156
+OK!!  Test 4: 1164
+OK!!  Test 5: 1157
+OK!!  Test 6: 1153
+OK!!  Test 7: 1165
+OK!!  Test 8: 1155
+OK!!  Test 9: 1152
 */
 
 #include<iostream>
@@ -29,25 +29,22 @@ long long Rand(long long l, long long r){
 vector<double> a;
 
 
-string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/test/";
+string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/Sort/test/";
 
 
 template <typename T>
-void Merge_sort(vector<T> &a){
-    if(a.size()<=1) return;
-    vector<T> left, right;
-    int n = a.size();
-    int mid = n/2;
-    for(int i=0;i<mid;++i)
-        left.push_back(a[i]);
-    for(int i=mid;i<n;++i)
-        right.push_back(a[i]);
+void Merge_sort(vector<T> &a, int left, int right){
+    if(right-left<=0) return;
+    int mid = left + right >> 1;
     
-    Merge_sort(left);
-    Merge_sort(right);
-    merge(left.begin(),left.end(), right.begin(),right.end(), a.begin());//sử dụng std::merge để gộp 2 dãy
+    Merge_sort(a, left, mid);
+    Merge_sort(a, mid+1, right);
 
-    
+    vector<T> c(right-left+1);
+    //sử dụng std::merge để gộp 2 dãy
+    merge(a.begin()+left, a.begin()+mid+1, a.begin()+mid+1, a.begin()+right+1, c.begin());
+    for(int i=left;i<=right;++i)
+        a[i] = c[i-left];
 }
 
 void execute_test(int k){
@@ -60,14 +57,14 @@ void execute_test(int k){
     a.resize(n);
     for(auto &x:a) fi>>x;
     
-
+  
 
 
 
     auto start = high_resolution_clock::now();
     
     cerr<<"OK!!  ";
-    Merge_sort(a);
+    Merge_sort(a, 0, n-1);
 
     auto stop = high_resolution_clock::now();
     
