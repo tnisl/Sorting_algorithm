@@ -28,7 +28,11 @@ long long Rand(long long l, long long r){
 }
 
 vector<double> a;
-
+/*
+lựa chọn pivot: 
+ngoại trừ các phần tử lớn nhất và nhỏ nhất, chọn ngẫu nhiên 1 phần tử trong mảng,
+nếu không có, lựa chọn phần tử lớn nhất
+*/
 template <typename T>
 T Find_pivot(vector<T> &v, int left, int right){
     T mi = *min_element(v.begin()+left, v.begin()+right+1);
