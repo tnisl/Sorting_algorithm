@@ -1,14 +1,14 @@
 /*
-OK!!  Test 0: 646
-OK!!  Test 1: 640
-OK!!  Test 2: 721
-OK!!  Test 3: 730
-OK!!  Test 4: 713
-OK!!  Test 5: 710
-OK!!  Test 6: 717
-OK!!  Test 7: 718
-OK!!  Test 8: 713
-OK!!  Test 9: 719
+OK!!  Test 0: 358
+OK!!  Test 1: 339
+OK!!  Test 2: 548
+OK!!  Test 3: 490
+OK!!  Test 4: 454
+OK!!  Test 5: 512
+OK!!  Test 6: 468
+OK!!  Test 7: 458
+OK!!  Test 8: 456
+OK!!  Test 9: 453
 */
 
 #include<iostream>
@@ -28,34 +28,24 @@ long long Rand(long long l, long long r){
 }
 
 vector<double> a;
-/*
-lựa chọn pivot: lấy trung bình cộng các số, nếu bằng giá trị nhỏ nhất, pivot = max, nếu không pivot = tbc;
-*/
-template <typename T>
-T Find_pivot(vector<T> &v, int left, int right){
-    T mi = *min_element(v.begin()+left, v.begin()+right+1);
-    T ma = *max_element(v.begin()+left, v.begin()+right+1);
-    T sum = accumulate(v.begin()+left, v.begin()+right+1, 0);
-    sum /= (right-left+1);
-    if(sum == mi) return ma;
-    return sum;
-}
+
 
 template <typename T>
-int Partition(vector<T> &v, T pivot, int left, int right){
-    int n = right - left + 1;
+int Partition(vector<T> &v, int left, int right){
+    int pivot = Rand(left, right);
+    swap(v[pivot], v[right]);
+
+    int l = left, r = right-1;
     while(1){
-        while(left <= right && v[left] < pivot) ++left;
-        while(left <= right && v[right] >= pivot) --right;
-        if(left >=right) break;
-
-        swap(v[left], v[right]);
-        ++left;
-        --right;
+        while(l <= r && v[l] < v[right]) ++l;
+        while(l <= r && v[r] >= v[right]) --r;
+        if(l>=r) break;
+        swap(v[l], v[r]);
+        ++l;
+        --r;
     }
-
-    if(right == -1 ||left == n) return -1;
-    return left;
+    swap(v[right], v[l]);
+    return l;
 }
 
 int cnt=0;
@@ -67,13 +57,11 @@ void Quick_sort(vector<T> &v, int left, int right){
         if(v[left] > v[right]) swap(v[left], v[right]);
         return;
     }
-    T pivot = Find_pivot(v, left, right);
-    int pos = Partition(v, pivot, left, right);
-    if(pos == -1) return;
-   
-    if(pos == left || pos == right) return;
+    int pos = Partition(v, left, right);
+
+    //cout<<left<<" "<<right<<" "<<pos<<endl;
     Quick_sort(v, left, pos-1);
-    Quick_sort(v, pos, right);
+    Quick_sort(v, pos+1, right);
     
 }
 
@@ -115,5 +103,7 @@ int32_t main(){
     freopen("qs.out", "w", stdout);
     for(int i=0;i<10;++i)
         execute_test(i);
+
+    
     return 0;
 }
