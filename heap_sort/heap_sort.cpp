@@ -48,14 +48,14 @@ void Heap_sort(vector<T> &a){
             else break;
         }
     }
-    int sz = n;
+    int sz = n, next1, next2, x;
     while(sz>1){
-        int x = 1;
+        x = 1;
         swap(a[x], a[sz]);
         --sz;
         while(x < sz){
             
-            int next1 = (x<<1), next2 = (x<<1|1);
+            next1 = (x<<1), next2 = (x<<1|1);
             if(next1 > sz) break;
             if(next2 <=sz && a[next1] < a[next2]) swap(next1, next2);
 
