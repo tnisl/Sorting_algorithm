@@ -30,9 +30,6 @@ long long Rand(long long l, long long r){
 
 
 
-string PATH = "D:/.suc_vat/Y2/IT003/Buoi_2/Sort/test/";
-
-
 template <typename T>
 void Heap_sort(vector<T> &a){
 
@@ -70,37 +67,7 @@ void Heap_sort(vector<T> &a){
 
 }
 
-void execute_test(int k){
-    string t = "..inp";
-    t[0] = '0' + k;
-    ifstream fi(PATH + t);
-    
-    vector<double> a;
-    int n;
-    fi>>n;
-    a.resize(n+1);
-    for(int i=1; i<=n; ++i)
-        fi>>a[i];
-    
-    auto start = high_resolution_clock::now();
-    cerr<<"OK!! ";
-    Heap_sort(a);
-
-    auto stop = high_resolution_clock::now();
-    
-    auto duration = duration_cast<milliseconds>(stop - start);
-
-    cerr<<"Test "<<k<< ": "<<duration.count()<<endl;
-    fi.close();
-    for(int i=1; i<a.size(); ++i) cout<<a[i]<<endl;
-}
-
-
-
 int32_t main(){
-   freopen("hs.out", "w", stdout);
-    for(int i=0;i<10;++i)
-        execute_test(i);
     
 
 

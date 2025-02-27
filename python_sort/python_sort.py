@@ -13,7 +13,7 @@ import numpy as np
 import time
 
 for test in range(10):
-    PATH = "D:\\.suc_vat\\Y2\\IT003\\Buoi_2\\Sort\\test\\"
+    PATH = ""
     t = str(test)
     t = t + ".inp"
     PATH = PATH + t
@@ -38,25 +38,3 @@ for test in range(10):
 
         print(f"Test {test}: {(end-start)*1000:.0f} ms\0")
         
-
-
-    
-
-"""
- 
-
-
-x = input()
-x = input()
-x = x.split(" ")
-if x[len(x)-1] == "":
-    x.pop()
-
-arr = np.arange(0)
-
-for it in x:
-    arr = np.append(arr, float(it))
-
-arr = np.sort(arr)
-
-"""
